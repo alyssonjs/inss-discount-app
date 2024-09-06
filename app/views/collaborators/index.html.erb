@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mt-5 pt-4">
+  <div class="container-fluid">
+    <i class="far fa-list-alt fa-2x mt-1" data-bs-trigger="hover focus" data-bs-content="Disabled popover"></i>
+    <a class="navbar-brand" style="margin-left: 10px">Controle de Colaboradores</a>
+    <% if current_user.admin? %>
+      <div class="row">
+          <%= link_to 'Relatórios', report_collaborators_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+    <div class="row">
+        <%= link_to '', "/collaborators/new", class: 'fas fa-user-plus', style: 'color: black;' %>
+    </div>
+  </div>
+</nav>
+
+<div  style="width: 100%; padding-top:0">
+  <small class="offset-5" id="notice" style="color: red"><%= notice %></small>
+  <div class="card" style="height: 200px ">
+    <table class="table table-striped table-hover" id="collaborators" style="font-family: DINPro-Bold; font-size: 11px;">
+      <thead>
+        <tr>
+          <th class="w-25" style="text-align: center">NOME</th>
+          <th style="text-align: center">CPF</th>
+          <th style="text-align: center">DATA NASC.</th>
+          <th style="text-align: center">CONTATO</th>
+          <th style="text-align: center">SÁLARIO</th>
+          <th style="text-align: center">DESC. INSS</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @collaborators %>
+      </tbody>
+    </table>
+      <div class="pagination justify-content-center mt-3">
+        <%= paginate @collaborators %>
+      </div>
+  </div>
+</div>
+
+<%= render 'shared/modal', modal_id: 'newCollaboratorModal', modal_title: 'Novo Colaborador'  %>
+<%= render 'shared/modal', modal_id: 'editCollaboratorModal', modal_title: 'Editar Colaborador' %>

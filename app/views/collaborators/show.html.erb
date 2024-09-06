@@ -1,0 +1,78 @@
+<p id="notice" class="alert alert-info"><%= notice %></p>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mt-5">
+  <div class="container-fluid">
+    <i class="fas fa-id-card fa-2x"></i>
+    <a class="navbar-brand ms-2">
+      <% if @collaborator.name.present? %>
+        <%= @collaborator.name.capitalize %>
+      <% end %>
+    </a>
+  </div>
+</nav>
+
+<hr class="mt-2">
+
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center">
+    <%= link_to 'Voltar', collaborators_path, class: "btn btn-outline-primary mb-3" %>
+    <%= link_to 'Editar', edit_collaborator_path(@collaborator), class: "btn btn-primary mb-3 ms-2" %>
+  </div>
+
+
+  <div class="card shadow-sm rounded-3">
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-4 text-center">
+          <div class="border rounded d-flex align-items-center justify-content-center" style="width: 120px; height: 150px;">
+            <h6>FOTO</h6>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <h5 class="mb-3">Informações Pessoais</h5>
+          <p><strong>CPF:</strong> <%= @collaborator.cpf %></p>
+          <p><strong>Salário:</strong> <%= format_to_currency(@collaborator.salary) %></p>
+          <p><strong>Telefone:</strong> <%= @collaborator.personal_phone_number %></p>
+        </div>
+
+        <div class="col-md-4">
+          <h5 class="mb-3">Mais Informações</h5>
+          <p><strong>Aniversário:</strong> <%= @collaborator.birthday %></p>
+          <p><strong>Desconto do INSS:</strong> <%= format_to_currency(@collaborator.inss_discount) %></p>
+          <p><strong>Contato de Referência:</strong> <%= @collaborator.reference_phone_number %></p>
+        </div>
+      </div>
+
+      <div class="accordion mt-3" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Dados de Endereço
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <p><strong>Estado:</strong> <%= @collaborator.state %></p>
+                  <p><strong>Cidade:</strong> <%= @collaborator.city %></p>
+                </div>
+
+                <div class="col-md-4">
+                  <p><strong>Bairro:</strong> <%= @collaborator.neighborhood %></p>
+                  <p><strong>CEP:</strong> <%= @collaborator.postal_code %></p>
+                </div>
+
+                <div class="col-md-4">
+                  <p><strong>Endereço:</strong> <%= @collaborator.address %></p>
+                  <p><strong>Número:</strong> <%= @collaborator.number %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

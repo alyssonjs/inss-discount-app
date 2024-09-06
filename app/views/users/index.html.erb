@@ -1,0 +1,33 @@
+<% if notice %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <%= notice %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="card shadow-sm rounded-3" style="width: 100%; max-width: 400px;">
+    <div class="card-header bg-primary text-white text-center">
+      <h4 class="mb-0">Login</h4>
+    </div>
+    <div class="card-body">
+      <form action="/sessions" method="POST">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        
+        <div class="mb-3">
+          <label for="email" class="form-label">E-mail</label>
+          <input type="email" class="form-control" id="email" name="login[email]" placeholder="nome@example.com" required>
+        </div>
+        
+        <div class="mb-4">
+          <label for="password" class="form-label">Senha</label>
+          <input type="password" class="form-control" id="password" name="login[password]" placeholder="Insira sua senha" required>
+        </div>
+        
+        <div class="d-grid">
+          <%= button_to 'Entrar', '#', class: 'btn btn-warning', type: 'submit' %>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

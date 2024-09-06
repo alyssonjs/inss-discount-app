@@ -1,0 +1,55 @@
+<%= form_with(model: user, local: true, html: { class: 'needs-validation' }) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container mt-5">
+    <%= link_to 'Voltar', login_path, class: 'btn btn-outline-primary mb-3' %>
+    
+    <div class="card shadow-sm rounded-3">
+      <div class="card-header text-white text-center" style="background: #41C1E8;">
+        <h4 class="mb-0">Cadastre-se</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2 col-12">
+            <%= form.label :name, 'Seu nome completo', class: 'form-label' %>
+            <%= form.text_field :name, class: 'form-control', placeholder: 'José Carlos' %>
+          </div>
+        </div>
+        
+        <div class="row mt-3">
+          <div class="col-lg-8 offset-lg-2 col-12">
+            <%= form.label :email, 'E-mail', class: 'form-label' %>
+            <%= form.email_field :email, class: 'form-control', placeholder: 'nome@redspark.com' %>
+          </div>
+        </div>
+        
+        <div class="row mt-3">
+          <div class="col-lg-8 offset-lg-2 col-12">
+            <%= form.label :password, 'Senha', class: 'form-label' %>
+            <%= form.password_field :password, class: 'form-control' %>
+          </div>
+        </div>
+        
+        <div class="row mt-3">
+          <div class="col-lg-8 offset-lg-2 col-12">
+            <%= form.label :password_confirmation, 'Confirme a senha', class: 'form-label' %>
+            <%= form.password_field :password_confirmation, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card-footer text-center">
+        <%= form.submit 'Cadastrar', class: 'btn btn-warning' %>
+      </div>
+    </div>
+  </div>
+<% end %>

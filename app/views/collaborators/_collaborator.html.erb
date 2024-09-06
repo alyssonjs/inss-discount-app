@@ -1,0 +1,35 @@
+<% if collaborator %>
+  <tr>
+      <td onclick='setCollaborator(<%= collaborator.id %>)' style="cursor: pointer; text-align: center">
+        <%= collaborator.name %>
+      </td>
+      <td onclick='setCollaborator(<%= collaborator.id %>)' style="cursor: pointer; text-align: center">
+        <%= collaborator.cpf %>
+      </td>
+      <td onclick='setCollaborator(<%= collaborator.id %>)' style="cursor: pointer; text-align: center">
+        <%= collaborator.birthday %>
+      </td>
+      <td onclick='setCollaborator(<%= collaborator.id %>)' style="cursor: pointer; text-align: center">
+        <%= collaborator.personal_phone_number %>
+      </td>
+      <td onclick='setCollaborator(<%= collaborator.id %>)' tyle="cursor: pointer; text-align: center">
+        <%= format_to_currency(collaborator.salary) %>
+      </td>
+      <td onclick='setCollaborator(<%= collaborator.id %>)' tyle="cursor: pointer; text-align: center">
+        <%= format_to_currency(collaborator.inss_discount) %>
+      </td>
+    <td style="text-align: center">
+      <%= link_to '', "/collaborators/#{collaborator.id}/edit", class: 'far fa-edit', style: 'color: black;' %>
+    </td>
+    <td style="text-align: center">
+      <%= link_to '', collaborator_path(collaborator), method: :delete, data: { confirm: 'Esse colaborador será excluído permanentemente. Deseja realmente concluir a ação?' }, class: 'fas fa-trash-alt', style: 'color: black;' %>
+    </td>
+  </tr>
+<% end %>
+
+<script type="text/javascript">
+  function setCollaborator(collaboratorId) {
+    location.assign(`/collaborators/${collaboratorId}`);
+    return false;
+  }
+</script>

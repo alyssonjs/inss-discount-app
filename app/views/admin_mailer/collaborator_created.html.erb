@@ -1,0 +1,29 @@
+<h1>Novo Colaborador Criado/Atualizado</h1>
+
+<p>Informações do colaborador:</p>
+<ul>
+  <li>Nome: <%= @collaborator.name %></li>
+  <li>CPF: <%= @collaborator.cpf %></li>
+  <li>Telefone: <%= @collaborator.personal_phone_number %></li>
+  <li>Salário: <%= number_to_currency(@collaborator.salary, unit: 'R$') %></li>
+  <li>INSS Desconto: <%= number_to_currency(@collaborator.inss_discount, unit: 'R$') %></li>
+  <li>Salário Liquído: <%= number_to_currency(@collaborator.net_salary, unit: 'R$') %></li>
+</ul>
+
+<h3>Relatório de Funcionários por Faixa Salarial</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Faixa Salarial</th>
+      <th>Número de Funcionários</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @report_data.each do |range, count| %>
+      <tr>
+        <td><%= range %></td>
+        <td><%= count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

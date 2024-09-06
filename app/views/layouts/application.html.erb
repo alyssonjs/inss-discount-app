@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyInss</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-light fixed-top" style="background-color: #41C1E8;">
+      <div class="container-fluid border-warning border-5">
+        <div class="row align-items-center">
+          <div class="col-2">
+            <i class="fas fa-crop fa-2x text-white"></i>
+          </div>
+          <div class="mt-4 col-10">
+            <a class="navbar-brand text-white" href="/">
+              <h5>Meu I<span class="text-warning">N</span>SS</h5>
+            </a>
+          </div>
+        </div>
+        <% if logged_in? %>
+          <div class="row">
+            <div class="col-7">
+              <h2 class="mt-2 text-white" style="font-size: 15px;">Bem vindo, <%= current_user.name %></h2>
+            </div>
+            <div class="col-5 text-end">
+              <%= link_to '', logout_path(current_user), method: :delete, data: { confirm: 'Tem certeza que deseja sair?' }, class: "fas fa-power-off fa-2x text-white mt-2" %>
+            </div>
+          </div>
+        <% else %>
+          <%= link_to 'Cadastrar', new_user_path, class: 'btn btn-light' %>
+        <% end %>
+      </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+      <% if logged_in? %>
+        <div class="row bg-white">
+          <div class="col-12">
+            <%= yield %>
+          </div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-12">
+            <%= yield %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>

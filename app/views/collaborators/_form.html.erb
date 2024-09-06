@@ -1,0 +1,113 @@
+<div class="mx-auto mt-4" data-controller="form" data-action="submit->form#submitForm">
+  <%= form_with(model: @collaborator, remote: true, data: { target: "form.form" }) do |form| %>
+    <% @collaborator%>
+    <% if @collaborator&.errors&.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h5><%= pluralize(@collaborator.errors.count, "erro") %> impediram o colaborador de ser salvo:</h5>
+        <ul>
+          <% @collaborator.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <!-- Informações pessoais -->
+    <div class="card mb-4 shadow" style="border-radius: 15px;">
+      <div class="card-header text-white" style="background: #41C1E8;">
+        <h5 class="mb-0">Dados Pessoais</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="inputName" class="form-label">Nome completo</label>
+            <%= form.text_field :name, class: "form-control form-control-sm", placeholder: 'Digite o nome' %>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="inputCPF" class="form-label">CPF</label>
+            <%= form.text_field :cpf, class: "form-control form-control-sm", placeholder: '000.000.000-00', data: { action: "input->form#maskCPF" } %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="inputDate" class="form-label">Data de Nascimento</label>
+            <%= form.date_field :birthday, class: "form-control form-control-sm" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="inputSalary" class="form-label">Salário</label>
+            <%= form.text_field :salary, class: "form-control form-control-sm", placeholder: 'R$ 1.000,00', value: format_to_currency(@collaborator.salary), data: { form_target: "salary", action: "change->form#changeSalary" } %>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="inputINSS" class="form-label">Desconto do INSS</label>
+            <%= form.text_field :inss_discount, class: "form-control form-control-sm", placeholder: 'R$ 0,00', value: format_to_currency(@collaborator.inss_discount), readonly: true, data: { form_target: "inss" } %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="tel" class="form-label">Seu telefone</label>
+            <%= form.text_field :personal_phone_number, class: "form-control form-control-sm", placeholder: '(00) 00000-000', data: { action: "input->form#maskPhone" } %>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="tel" class="form-label">Contato Referencial</label>
+            <%= form.text_field :reference_phone_number, class: "form-control form-control-sm", placeholder: '(00) 00000-000', data: { action: "input->form#maskPhone" } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Endereço -->
+    <div class="card mb-4 shadow" style="border-radius: 15px;">
+      <div class="card-header text-white" style="background: #41C1E8;">
+        <h5 class="mb-0">Endereço</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <small class="mb-2 text-muted">Digite seu CEP para preenchimento automático</small>
+          <div data-form-target="error" class="alert alert-danger d-none" role="alert"></div>
+          <div class="col-md-4 mb-3">
+            <label for="inputPostalCode" class="form-label">CEP</label>
+            <%= form.text_field :postal_code, class: "form-control form-control-sm", placeholder: '00.000-000', data: { action: "input->form#maskCep change->form#getAddress" } %>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="inputState" class="form-label">Estado</label>
+            <%= form.text_field :state, class: "form-control form-control-sm", placeholder: 'UF', data: { form_target: "state" } %>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="inputCity" class="form-label">Cidade</label>
+            <%= form.text_field :city, class: "form-control form-control-sm", placeholder: 'Insira sua cidade', data: { form_target: "city" } %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8 mb-3">
+            <label for="inputNeighborhood" class="form-label">Bairro</label>
+            <%= form.text_field :neighborhood, class: "form-control form-control-sm", placeholder: 'Bairro', data: { form_target: "neighborhood" } %>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="inputAddress" class="form-label">Rua</label>
+            <%= form.text_field :address, class: "form-control form-control-sm", placeholder: 'Insira o endereço', data: { form_target: "address" } %>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="inputNumber" class="form-label">Número</label>
+            <%= form.number_field :number, class: "form-control form-control-sm", placeholder: 'Número da residência' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col text-center">
+        <%= link_to 'Voltar', collaborators_path, class: "btn btn-outline-primary me-2" %>
+        <%= button_tag 'Salvar', class: "btn btn-primary", style: "background: #41C1E8; color: white;" %>
+      </div>
+    </div>
+  <% end %>
+</div>
