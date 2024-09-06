@@ -12,6 +12,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_DB: inss_test_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -33,11 +43,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - name: Create tmp/db directory and set permissions
-        run: |
-          mkdir -p ./tmp/db
-          sudo chmod -R 777 ./tmp/db
-
       - name: Build Docker image
         uses: docker/build-push-action@v4
         with:
@@ -47,8 +52,17 @@ jobs:
           cache-from: type=registry,ref=my-app:cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
+      - name: Create tmp/db directory and set permissions
+        run: |
+          mkdir -p ./tmp/db
+          sudo chmod -R 777 ./tmp/db
+
       - name: Start Docker Compose services
         run: docker-compose up -d db
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          docker-compose exec -T db sh -c 'until pg_isready -U postgres; do sleep 1; done'
 
       - name: Run tests
         run: docker-compose run --rm web rake test
