@@ -1,6 +1,6 @@
-# My INSS
+# INSS Discount
 
-    Aplicação básica para empresas controlarem o desconto de INSS dos colaboradores.
+Aplicação básica para empresas controlarem o desconto de INSS dos colaboradores.
 
 ## Docker:
 Para inicializar o docker basta executar os comandos:
