@@ -1,0 +1,10 @@
+# Ignore log files
+log/*
+!log/.keep
+
+# Ignore temporary files
+tmp/*
+!tmp/.keep
+
+# Ignore other large files
+*.log
