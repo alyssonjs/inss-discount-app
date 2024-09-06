@@ -52,7 +52,7 @@ Voce pode acessar o mailcacher em localhost:1080
 ## Outras Funcionalidades:
 
 - Docker e Docker Compose configurados para facilitar a instalação e execução do projeto.
-- TDD with Rspec using Faker, FactoryBot, Shoulda Matchers end DatabaseCleaner for:
+- TDD com Rspec usando Faker, FactoryBot, Shoulda Matchers e DatabaseCleaner para:
     - Models
     - Rounting
     - Controllers
