@@ -1,5 +1,5 @@
 class AdminMailer < ApplicationMailer
-  default from: 'no-reply@redsparkle.com'
+  default from: 'no-reply@redspark.com'
 
   def collaborator_created(collaborator, report_data)
     @collaborator = collaborator
