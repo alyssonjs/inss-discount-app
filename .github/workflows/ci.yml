@@ -60,9 +60,12 @@ jobs:
       - name: Start Docker Compose services
         run: docker-compose up -d db
 
+      - name: List Docker containers
+        run: docker ps
+
       - name: Wait for PostgreSQL to be ready
         run: |
-          docker-compose exec -T db sh -c 'until pg_isready -U postgres; do sleep 2; done'
+          timeout 300 sh -c 'until docker-compose exec -T db sh -c "pg_isready -U postgres"; do sleep 2; done'
 
       - name: View PostgreSQL logs
         run: docker-compose logs db
