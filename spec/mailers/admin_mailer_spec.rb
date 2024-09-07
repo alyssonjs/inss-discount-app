@@ -1,4 +1,3 @@
-# spec/mailers/admin_mailer_spec.rb
 require "rails_helper"
 
 RSpec.describe AdminMailer, type: :mailer do

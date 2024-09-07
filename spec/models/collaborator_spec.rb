@@ -1,4 +1,5 @@
-# spec/models/collaborator_spec.rb
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Collaborator, type: :model do
@@ -21,7 +22,6 @@ RSpec.describe Collaborator, type: :model do
   end
 
   before do
-    # Ensure ActiveJob uses the test adapter
     ActiveJob::Base.queue_adapter = :test
   end
 

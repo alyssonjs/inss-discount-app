@@ -12,7 +12,6 @@ class Collaborator < ApplicationRecord
 
   belongs_to :user
 
-
   private
 
   def cpf_format

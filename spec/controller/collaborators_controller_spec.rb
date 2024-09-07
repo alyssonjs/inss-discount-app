@@ -5,7 +5,7 @@ RSpec.describe CollaboratorsController, type: :controller do
   let!(:collaborator) { create(:collaborator, user: user) }
 
   before do
-    session[:user_id] = user.id # Simula o login do usuário
+    session[:user_id] = user.id
   end
 
   describe 'GET #index' do
@@ -93,7 +93,6 @@ RSpec.describe CollaboratorsController, type: :controller do
       get :calculate_inss_discount, params: { salary: 3000 }, xhr: true
       expect(response).to be_successful
       json_response = JSON.parse(response.body)
-      # Add your expectations on `json_response` here
     end
   end
 
