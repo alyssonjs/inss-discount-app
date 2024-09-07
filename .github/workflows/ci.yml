@@ -25,10 +25,11 @@ jobs:
       - name: Install dependent libraries
         run: sudo apt-get install libpq-dev
 
+      - name: Install Bundler
+        run: gem install bundler -v 2.4.22
+
       - name: Bundle install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+        run: bundle install --jobs 4 --retry 3
 
       - name: Setup Database
         run: |
