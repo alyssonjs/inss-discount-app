@@ -19,7 +19,7 @@ RSpec.describe AdminMailer, type: :mailer do
     it 'renders the headers' do
       expect(mail.subject).to eq('Salario do Colaborador Atualizado')
       expect(mail.to).to eq([admin.email])
-      expect(mail.from).to eq(['no-reply@redsparkle.com'])
+      expect(mail.from).to eq(['no-reply@redspark.com'])
     end
   end
 end
