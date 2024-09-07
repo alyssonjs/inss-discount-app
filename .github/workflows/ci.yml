@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:11
+        image: postgres:14
         ports:
           - 5432:5432
         env:
@@ -20,7 +20,7 @@ jobs:
       
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "2.7.2"
+          ruby-version: "2.7.8" # Atualize a versão do Ruby para corresponder ao seu Gemfile
 
       - name: Install dependent libraries
         run: sudo apt-get install libpq-dev
